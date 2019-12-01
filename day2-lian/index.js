@@ -78,11 +78,11 @@ program
     .action(()=>{
         inquirer.prompt(promptList).then(answers => {
                
-            if(userlist.some(item=>item.shen)==answers.shen){
-                console.log('此用户已经存在')
-            }else{
+            if(userlist.findIndex(item=>item.shen===answers.shen)==-1){
                 userlist.push(answers)
                 fs.writeFileSync('./userlist.json',JSON.stringify(userlist),'utf8')
+            }else{
+               console.log('已经存在')
             }
            
         })
